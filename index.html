@@ -1,198 +1,762 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEST150 | Theological Archive</title>
+    <meta name="description" content="신학 카드뉴스 아카이브">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<title>WEST150 | Theological Archive</title>
+    <style>
+        /* ==========================================
+           WEST150 Archive Total CSS (Apple Style)
+        ========================================== */
+        :root {
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #1d1d1f;
+            --sub: #6e6e73;
+            --blue: #0071e3;
+            --border: #d2d2d7;
+            --shadow: 0 12px 35px rgba(0, 0, 0, .08);
+            --radius: 28px;
+            --transition: .35s ease;
+        }
 
-<meta name="description" content="신학 카드뉴스 아카이브">
+        body.dark {
+            --bg: #000000;
+            --card: #1c1c1e;
+            --text: #ffffff;
+            --sub: #98989d;
+            --border: #333333;
+            --shadow: 0 12px 35px rgba(0, 0, 0, .5);
+        }
 
-<link rel="stylesheet" href="css/style.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
 
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, .72);
+            border-bottom: 1px solid rgba(0, 0, 0, .05);
+            z-index: 999;
+        }
+
+        body.dark .header {
+            background: rgba(0, 0, 0, .72);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: .8px;
+        }
+
+        nav {
+            display: flex;
+            gap: 45px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        #themeToggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            transition: .3s;
+            font-size: 18px;
+        }
+
+        #themeToggle:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        /* Hero Header */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 90px);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: var(--sub);
+            margin-bottom: 30px;
+        }
+
+        /* Hero Card (최신 대표 카드 대형 디스플레이) */
+        .hero-featured {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .hero-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-card-content {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+
+        .hero-card-content h2 {
+            font-size: 38px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .hero-card-content p {
+            font-size: 17px;
+            color: var(--sub);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .hero-card-content .date {
+            font-size: 14px;
+            color: var(--sub);
+            opacity: 0.8;
+        }
+
+        /* Search Section */
+        .search-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .search-section h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 600px;
+            height: 56px;
+            border: none;
+            outline: none;
+            border-radius: 999px;
+            background: var(--card);
+            color: var(--text);
+            padding: 0 28px;
+            font-size: 17px;
+            box-shadow: var(--shadow);
+            transition: .3s;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, .2);
+        }
+
+        /* Tags */
+        .tags {
+            max-width: 1200px;
+            margin: 25px auto 60px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        .tags button {
+            border: none;
+            background: var(--card);
+            color: var(--text);
+            padding: 10px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: var(--shadow);
+            transition: .25s;
+        }
+
+        .tags button:hover, .tags button.active {
+            background: var(--blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Grid Cards Section */
+        .featured {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px 100px;
+        }
+
+        .featured h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform .35s, box-shadow .35s;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            transition: transform .5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.04);
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .category {
+            color: var(--blue);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card p {
+            color: var(--sub);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .card small {
+            color: var(--sub);
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            max-width: 1000px;
+            margin: 60px auto 100px;
+            padding: 70px 40px;
+            background: var(--card);
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-box h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-box p {
+            font-size: 18px;
+            color: var(--sub);
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 999px;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 113, 227, .3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            background: var(--bg);
+        }
+
+        footer strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        footer div {
+            margin: 8px 0;
+            color: var(--sub);
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: var(--card);
+            color: var(--text);
+            font-size: 18px;
+            transition: .3s;
+            box-shadow: var(--shadow);
+        }
+
+        .social a:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        /* Modal Popup (카드 상세 보기) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--card);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: var(--radius);
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: modalUp 0.35s ease-out;
+        }
+
+        @keyframes modalUp {
+            from { transform: translateY(30px) scale(0.95); }
+            to { transform: translateY(0) scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+        }
+
+        .modal-body img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+        }
+
+        .modal-text {
+            padding: 35px;
+        }
+
+        .modal-text h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .modal-text p {
+            font-size: 18px;
+            color: var(--sub);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media(max-width: 900px) {
+            .hero-card {
+                grid-template-columns: 1fr;
+            }
+            .hero-card img {
+                min-height: 250px;
+            }
+            .header {
+                padding: 0 20px;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<header class="header">
-
-<div class="logo">
-WEST150
-</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-
-<a href="archive.html">Archive</a>
-
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-</nav>
-
-<div class="right-menu">
-
-<button id="themeToggle">
-🌙
-</button>
-
-</div>
-
-</header>
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>
-
-Think Biblically.
-
-</h1>
-
-<p>
-
-말씀을 더 깊이 이해하다.
-
-</p>
-
-<a href="#archive" class="button">
-
-Explore Archive
-
-</a>
-
-</div>
-
-</section>
-
-<section class="search-section">
-
-<h2>
-
-Search
-
-</h2>
-
-<input
-type="text"
-id="searchInput"
-placeholder="제목 또는 태그 검색">
-
-</section>
-
-<section class="tags">
-
-<button id="showAll">전체</button>
-
-<button>#창세기</button>
-
-<button>#출애굽기</button>
-
-<button>#예수님</button>
-
-<button>#삼위일체</button>
-
-<button>#교회사</button>
-
-<button>#칼빈</button>
-
-<button>#종교개혁</button>
-
-<button>#구원론</button>
-
-</section>
-
-<section class="featured" id="archive">
-
-<h2>
-
-Latest Archive
-
-</h2>
-
-<div
-class="card-grid"
-id="cardGrid">
-
-</div>
-
-</section>
-
-<section class="contact-box">
-
-<h2>
-
-문의 및 제안
-
-</h2>
-
-<p>
-
-사이트 개선이나 콘텐츠 제안을 보내주세요.
-
-</p>
-
-<a
-href="https://forms.gle/여기에구글폼주소"
-target="_blank"
-class="button">
-
-Google Form
-
-</a>
-
-</section>
-
-<footer>
-
-<strong>
-
-@west150official
-
-</strong>
-
-<div>
-
-west150official@gmail.com
-
-</div>
-
-<div class="social">
-
-<a href="https://x.com/west150official">
-
-𝕏
-
-</a>
-
-<a href="https://threads.net/@west150official">
-
-Threads
-
-</a>
-
-</div>
-
-<p>
-
-© 2026 WEST150
-
-</p>
-
-</footer>
-
-<script src="js/app.js"></script>
-
+    <header class="header">
+        <div class="logo">WEST150</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#archive">Archive</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="right-menu">
+            <button id="themeToggle">🌙</button>
+        </div>
+    </header>
+
+    <section class="hero fade-up">
+        <h1>Think Biblically.</h1>
+        <p>말씀을 더 깊이 이해하다.</p>
+    </section>
+
+    <section class="hero-featured fade-up" id="heroFeatured">
+        </section>
+
+    <section class="search-section fade-up">
+        <h2>Search</h2>
+        <input type="text" id="searchInput" placeholder="제목 또는 태그 검색">
+    </section>
+
+    <section class="tags fade-up">
+        <button class="active" id="showAll">전체</button>
+        <button>#삼위일체</button>
+        <button>#창세기</button>
+        <button>#조직신학</button>
+        <button>#구약</button>
+        <button>#종교개혁</button>
+        <button>#칼빈</button>
+    </section>
+
+    <section class="featured fade-up" id="archive">
+        <h2>Latest Archive</h2>
+        <div class="card-grid" id="cardGrid"></div>
+    </section>
+
+    <section class="contact-box fade-up" id="contact">
+        <h2>문의 및 제안</h2>
+        <p>사이트 개선이나 신학 콘텐츠 제안을 보내주세요.</p>
+        <a href="https://forms.gle/여기에구글폼주소" target="_blank" class="button">Google Form</a>
+    </section>
+
+    <footer>
+        <strong>@west150official</strong>
+        <div>west150official@gmail.com</div>
+        <div class="social">
+            <a href="https://x.com/west150official" target="_blank">𝕏</a>
+            <a href="https://threads.net/@west150official" target="_blank">Threads</a>
+        </div>
+        <p>© 2026 WEST150</p>
+    </footer>
+
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body" id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 내장 데이터 (JSON 파일 대신 직접 내장하여 에러 차단)
+        const cardsData = [
+            {
+                "id": 1,
+                "title": "삼위일체",
+                "category": "조직신학",
+                "date": "2026.07.23",
+                "tags": ["삼위일체", "조직신학"],
+                "description": "삼위일체 교리에 대한 핵심 개념과 성경적 근거를 카드뉴스로 쉽게 정리했습니다.",
+                "image": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&auto=format&fit=crop"
+            },
+            {
+                "id": 2,
+                "title": "창세기 개요",
+                "category": "성경",
+                "date": "2026.07.24",
+                "tags": ["창세기", "구약"],
+                "description": "창조부터 요셉의 이야기까지, 창세기의 전체적인 구조와 흐름을 한눈에 파악할 수 있습니다.",
+                "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop"
+            }
+        ];
+
+        // 2. 다크모드 토글
+        const themeToggle = document.getElementById("themeToggle");
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            themeToggle.textContent = "☀️";
+        }
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            const isDark = document.body.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            themeToggle.textContent = isDark ? "☀️" : "🌙";
+        });
+
+        // 3. 렌더링 함수
+        function renderApp() {
+            if (cardsData.length === 0) return;
+
+            // (1) Hero 대형 카드 표시 (데이터의 첫 번째 항목)
+            const heroData = cardsData[0];
+            const heroFeatured = document.getElementById("heroFeatured");
+            heroFeatured.innerHTML = `
+                <div class="hero-card" onclick="openModal(${heroData.id})">
+                    <img src="${heroData.image}" alt="${heroData.title}">
+                    <div class="hero-card-content">
+                        <span class="hero-badge">Featured Story</span>
+                        <span class="category">${heroData.category}</span>
+                        <h2>${heroData.title}</h2>
+                        <p>${heroData.description}</p>
+                        <span class="date">${heroData.date}</span>
+                    </div>
+                </div>
+            `;
+
+            // (2) 일반 카드 그리드 표시
+            const grid = document.getElementById("cardGrid");
+            grid.innerHTML = "";
+            cardsData.forEach(card => {
+                const tagsStr = card.tags.map(t => `#${t}`).join(" ");
+                grid.innerHTML += `
+                    <div class="card" onclick="openModal(${card.id})">
+                        <img src="${card.image}" alt="${card.title}">
+                        <div class="card-content">
+                            <span class="category">${card.category}</span>
+                            <h3>${card.title}</h3>
+                            <p>${card.description}</p>
+                            <small>${card.date} · ${tagsStr}</small>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // 4. 모달 상세 창
+        const modal = document.getElementById("cardModal");
+        const modalBody = document.getElementById("modalBody");
+        const modalClose = document.getElementById("modalClose");
+
+        function openModal(id) {
+            const card = cardsData.find(item => item.id === id);
+            if (!card) return;
+
+            const tagsStr = card.tags.map(t => `#${t}`).join(" ");
+            modalBody.innerHTML = `
+                <img src="${card.image}" alt="${card.title}">
+                <div class="modal-text">
+                    <span class="category">${card.category}</span>
+                    <h2>${card.title}</h2>
+                    <p>${card.description}</p>
+                    <small style="color:var(--sub);">${card.date} | ${tagsStr}</small>
+                </div>
+            `;
+            modal.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
+
+        modalClose.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        function closeModal() {
+            modal.classList.remove("show");
+            document.body.style.overflow = "auto";
+        }
+
+        // 5. 검색 및 태그 필터링
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", function() {
+            filterCards(this.value.toLowerCase());
+        });
+
+        const tagButtons = document.querySelectorAll(".tags button");
+        tagButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tagButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const keyword = btn.innerText === "전체" ? "" : btn.innerText.replace("#", "").toLowerCase();
+                filterCards(keyword);
+            });
+        });
+
+        function filterCards(keyword) {
+            const cards = document.querySelectorAll(".card-grid .card");
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(keyword) ? "block" : "none";
+            });
+        }
+
+        // 6. 스크롤 fade-up 애니메이션
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+        // 앱 실행
+        renderApp();
+    </script>
 </body>
-
 </html>
+
