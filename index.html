@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian Theology | Theological Archive</title>
-    <meta name="description" content="신학 카드뉴스 아카이브">
+    <meta name="description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브. 삼위일체, 구원론, 종교개혁 등 핵심 주제를 한눈에.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✝️</text></svg>">
+    <link rel="canonical" href="https://west150official.example.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Christian Theology">
+    <meta property="og:title" content="Christian Theology | Theological Archive">
+    <meta property="og:description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&auto=format&fit=crop">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christian Theology | Theological Archive">
+    <meta name="twitter:description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&auto=format&fit=crop">
 
     <!-- 폰트 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,7 +156,6 @@
         }
 
         .mobile-nav {
-            display: none;
             position: fixed;
             top: 64px;
             right: 20px;
@@ -148,18 +163,21 @@
             border-radius: 18px;
             box-shadow: var(--shadow);
             padding: 12px;
+            display: flex;
             flex-direction: column;
             gap: 4px;
             min-width: 180px;
             opacity: 0;
+            visibility: hidden;
             transform: translateY(-10px);
-            transition: opacity .25s ease, transform .25s ease;
+            transition: opacity .25s ease, transform .25s ease, visibility .25s;
             pointer-events: none;
             z-index: 1000;
         }
 
         .mobile-nav.open {
             opacity: 1;
+            visibility: visible;
             transform: translateY(0);
             pointer-events: auto;
         }
@@ -179,6 +197,68 @@
             color: var(--blue);
         }
 
+        /* Accessibility: focus states */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity .3s ease, transform .3s ease, visibility .3s, background .3s;
+            z-index: 900;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTop:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        @media(max-width: 900px) {
+            #backToTop {
+                bottom: 24px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
         /* Hero Header */
         .hero {
             padding-top: 130px;
@@ -195,9 +275,11 @@
         }
 
         .hero p {
-            font-size: 22px;
+            font-size: 21px;
+            font-weight: 400;
             color: var(--sub);
             margin-bottom: 30px;
+            letter-spacing: -.2px;
         }
 
         /* Search Section (Hero 바로 아래 중앙 배치) */
@@ -295,6 +377,11 @@
             min-height: 380px;
             object-fit: cover;
             display: block;
+            transition: transform .6s ease;
+        }
+
+        .hero-card:hover img {
+            transform: scale(1.03);
         }
 
         .hero-card-content {
@@ -346,8 +433,10 @@
 
         .featured h2 {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 40px;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            margin-bottom: 48px;
         }
 
         .card-grid {
@@ -747,6 +836,9 @@
         <p class="footer-copyright">© 2026 WEST150</p>
     </footer>
 
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="맨 위로 이동">↑</button>
+
     <!-- Card Modal -->
     <div class="modal" id="cardModal">
         <div class="modal-content">
@@ -795,6 +887,18 @@
             themeToggle.textContent = isDark ? "☀️" : "🌙";
         });
 
+        // 내부 앵커 링크(#home, #archive, #contact 등)는 JS로 직접 스크롤 처리
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener("click", (e) => {
+                const targetId = link.getAttribute("href").slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+
         // 모바일 햄버거 메뉴 토글
         const menuToggle = document.getElementById("menuToggle");
         const mobileNav = document.getElementById("mobileNav");
@@ -822,6 +926,27 @@
             }
         });
 
+        // 검색엔진용 구조화 데이터 (JSON-LD) 삽입
+        function injectStructuredData(sortedCards) {
+            const ld = {
+                "@context": "https://schema.org",
+                "@type": "Blog",
+                "name": "Christian Theology Archive",
+                "blogPost": sortedCards.map(card => ({
+                    "@type": "BlogPosting",
+                    "headline": card.title,
+                    "description": card.description,
+                    "image": card.image,
+                    "datePublished": card.date.replaceAll(".", "-"),
+                    "keywords": card.tags.join(", ")
+                }))
+            };
+            const script = document.createElement("script");
+            script.type = "application/ld+json";
+            script.textContent = JSON.stringify(ld);
+            document.head.appendChild(script);
+        }
+
         // 렌더링
         function renderApp() {
             if (cardsData.length === 0) return;
@@ -834,7 +959,7 @@
             const heroFeatured = document.getElementById("heroFeatured");
             heroFeatured.innerHTML = `
                 <div class="hero-card" onclick="openModal(${heroData.id})">
-                    <img src="${heroData.image}" alt="${heroData.title}" loading="lazy">
+                    <img src="${heroData.image}" alt="${heroData.title}" loading="lazy" decoding="async">
                     <div class="hero-card-content">
                         <span class="hero-badge">Featured Archive</span>
                         <span class="category">${heroData.category}</span>
@@ -852,7 +977,7 @@
                 const tagsStr = card.tags.map(t => `#${t}`).join(" ");
                 grid.innerHTML += `
                     <div class="card" onclick="openModal(${card.id})">
-                        <img src="${card.image}" alt="${card.title}" loading="lazy">
+                        <img src="${card.image}" alt="${card.title}" loading="lazy" decoding="async">
                         <div class="card-content">
                             <span class="category">${card.category}</span>
                             <h3>${card.title}</h3>
@@ -862,6 +987,8 @@
                     </div>
                 `;
             });
+
+            injectStructuredData(sorted);
         }
 
         // 모달 팝업
@@ -933,6 +1060,21 @@
             });
             noResults.style.display = (cards.length > 0 && visibleCount === 0) ? "block" : "none";
         }
+
+        // Back to Top 버튼
+        const backToTop = document.getElementById("backToTop");
+        function toggleBackToTop() {
+            if (window.scrollY > 150) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        }
+        window.addEventListener("scroll", toggleBackToTop, { passive: true });
+        toggleBackToTop();
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
         // 스크롤 애니메이션
         const observer = new IntersectionObserver((entries) => {
