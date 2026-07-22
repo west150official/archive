@@ -135,3 +135,81 @@ fetch("data/cards.json")
     console.error("cards.json 불러오기 실패", error);
 
   });
+
+/* ==========================================
+   검색 기능
+========================================== */
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", function(){
+
+    const keyword = this.value.toLowerCase();
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        const text = card.innerText.toLowerCase();
+
+        if(text.includes(keyword)){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+});
+
+/* ==========================================
+   태그 필터
+========================================== */
+
+const tagButtons = document.querySelectorAll(".tags button");
+
+tagButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const keyword = button.innerText.replace("#","").toLowerCase();
+
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach(card=>{
+
+            const text = card.innerText.toLowerCase();
+
+            if(text.includes(keyword)){
+
+                card.style.display="block";
+
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
+
+    });
+
+});
+
+/* ==========================================
+   전체보기
+========================================== */
+
+document.getElementById("showAll").addEventListener("click",()=>{
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        card.style.display="block";
+
+    });
+
+});
