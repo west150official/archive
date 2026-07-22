@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Theology | Theological Archive</title>
+    <meta name="description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브. 삼위일체, 구원론, 종교개혁 등 핵심 주제를 한눈에.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✝️</text></svg>">
+    <link rel="canonical" href="https://west150official.example.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Christian Theology">
+    <meta property="og:title" content="Christian Theology | Theological Archive">
+    <meta property="og:description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&auto=format&fit=crop">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christian Theology | Theological Archive">
+    <meta name="twitter:description" content="성경과 조직신학, 교회사를 카드뉴스로 쉽게 풀어낸 신학 아카이브.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&auto=format&fit=crop">
+
+    <!-- 폰트 로드 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           Christian Theology Archive Total CSS (Apple Style)
+        ========================================== */
+        :root {
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #1d1d1f;
+            --sub: #6e6e73;
+            --blue: #0071e3;
+            --border: #d2d2d7;
+            --shadow: 0 12px 35px rgba(0, 0, 0, .08);
+            --radius: 28px;
+            --transition: .35s ease;
+        }
+
+        body.dark {
+            --bg: #000000;
+            --card: #1c1c1e;
+            --text: #ffffff;
+            --sub: #98989d;
+            --border: #333333;
+            --shadow: 0 12px 35px rgba(0, 0, 0, .5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, .72);
+            border-bottom: 1px solid rgba(0, 0, 0, .05);
+            z-index: 999;
+        }
+
+        body.dark .header {
+            background: rgba(0, 0, 0, .72);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        #themeToggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            transition: .3s;
+            font-size: 18px;
+        }
+
+        #themeToggle:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #menuToggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            font-size: 18px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 64px;
+            right: 20px;
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity .25s ease, transform .25s ease, visibility .25s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 14px;
+            border-radius: 10px;
+            transition: background .2s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(0, 113, 227, .08);
+            color: var(--blue);
+        }
+
+        /* Accessibility: focus states */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity .3s ease, transform .3s ease, visibility .3s, background .3s;
+            z-index: 900;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTop:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        @media(max-width: 900px) {
+            #backToTop {
+                bottom: 24px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* Hero Header */
+        .hero {
+            position: relative;
+            margin-top: 64px;
+            padding: 140px 20px;
+            text-align: center;
+            background-image: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.75) 100%), url('IMG_2462.jpeg');
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(44px, 6.5vw, 84px);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0,0,0,.3);
+        }
+
+        .hero p {
+            font-size: 21px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, .85);
+            margin-bottom: 0;
+            letter-spacing: -.2px;
+        }
+
+        /* Search Section */
+        .search-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px 80px;
+            text-align: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--sub);
+            pointer-events: none;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        #searchInput {
+            width: 100%;
+            height: 56px;
+            border: none;
+            outline: none;
+            border-radius: 999px;
+            background: var(--card);
+            color: var(--text);
+            padding: 0 28px 0 52px;
+            font-size: 17px;
+            box-shadow: var(--shadow);
+            transition: .3s;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, .2);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--sub);
+            font-size: 17px;
+            display: none;
+        }
+
+        /* Hero Featured Card */
+        .hero-featured {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .hero-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 380px;
+            object-fit: cover;
+            display: block;
+            transition: transform .6s ease;
+        }
+
+        .hero-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-card-content {
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+
+        .hero-card-content h2 {
+            font-size: 36px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .hero-card-content p {
+            font-size: 16px;
+            color: var(--sub);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hero-card-content .date {
+            font-size: 14px;
+            color: var(--sub);
+            opacity: 0.8;
+        }
+
+        /* Grid Cards Section */
+        .featured {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px 100px;
+        }
+
+        .featured h2 {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            margin-bottom: 48px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform .35s, box-shadow .35s;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            transition: transform .5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.04);
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .category {
+            color: var(--blue);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card p {
+            color: var(--sub);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .card small {
+            color: var(--sub);
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        /* About Box - 수정됨: 다크모드 가시성 개선 */
+        .about-box {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 70px 40px 50px;
+            background: var(--card); /* 투명에서 카드로 변경하여 대비 향상 */
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: var(--shadow); /* 그림자 추가 */
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        body.dark .about-box {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .about-box h2 {
+            font-size: clamp(22px, 5vw, 34px);
+            font-weight: 700;
+            letter-spacing: -.5px;
+            margin-bottom: 20px;
+            color: var(--text);
+            word-break: keep-all; /* 모바일에서 글자가 잘리지 않도록 white-space: nowrap 제거 */
+        }
+
+        .about-box p {
+            font-size: 17px;
+            color: var(--sub);
+            line-height: 1.75;
+            max-width: 640px;
+            margin: 0 auto 14px;
+        }
+
+        .about-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            max-width: 1000px;
+            margin: 40px auto 60px;
+            padding: 70px 40px;
+            background: var(--card);
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        body.dark .contact-box {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-box h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-box p {
+            font-size: 18px;
+            color: var(--sub);
+            margin-bottom: 30px;
+        }
+
+        /* Button & Hover Fix */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 999px;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 113, 227, .3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px 50px;
+            text-align: center;
+            background: var(--bg);
+        }
+
+        footer strong {
+            display: block;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        footer div {
+            margin: 4px 0;
+            color: var(--sub);
+            font-size: 14px;
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 24px 0 20px;
+        }
+
+        .social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: var(--card);
+            color: var(--text);
+            font-size: 16px;
+            transition: .3s;
+            box-shadow: var(--shadow);
+        }
+
+        .social a:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        .social svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: var(--sub);
+            opacity: .7;
+            margin-top: 20px !important;
+        }
+
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--card);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: var(--radius);
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: modalUp 0.35s ease-out;
+        }
+
+        @keyframes modalUp {
+            from { transform: translateY(30px) scale(0.95); }
+            to { transform: translateY(0) scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+        }
+
+        .modal-body img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+        }
+
+        .modal-text {
+            padding: 35px;
+        }
+
+        .modal-text h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .modal-text p {
+            font-size: 18px;
+            color: var(--sub);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media(max-width: 900px) {
+            .hero-card {
+                grid-template-columns: 1fr;
+            }
+            .hero-card img {
+                min-height: 250px;
+            }
+            .header {
+                padding: 0 20px;
+            }
+            nav {
+                display: none;
+            }
+            #menuToggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 (Christian Theology 로고 & 네비게이션) -->
+    <header class="header">
+        <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">Christian Theology</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#search">Search</a>
+            <a href="#archive">Archive</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="right-menu">
+            <button id="themeToggle" aria-label="다크모드 전환">🌙</button>
+            <button id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#search">Search</a> <!-- 영어로 지정 및 JS를 통한 검색창 포커스 활성화 처리 완료 -->
+        <a href="#archive">Archive</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero Title -->
+    <section class="hero fade-up" id="home">
+        <div class="hero-inner">
+            <h1>Think Biblically.</h1>
+            <p>말씀을 더 깊이 이해하다.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-box fade-up" id="about">
+        <h2>About This Archive</h2>
+        <p>Christian Theology는 성경, 조직신학, 교회사의 핵심 주제들을 누구나 쉽게 이해할 수 있도록 카드뉴스 형식으로 정리하는 개인 아카이브입니다.</p>
+        <p>어려운 신학 용어와 개념을 짧고 명료한 콘텐츠로 풀어내어, 신앙의 깊이를 더하고 싶은 분들에게 실질적인 도움을 드리는 것을 목표로 합니다.</p>
+    </section>
+
+    <!-- Search Section (상단 중앙 배치) -->
+    <section class="search-section fade-up" id="search">
+        <div class="search-wrapper">
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input type="text" id="searchInput" placeholder="제목 또는 태그 검색 (예: 창세기, 삼위일체)">
+        </div>
+    </section>
+
+    <!-- Hero Featured Card (최신 카드 대형 노출) -->
+    <section class="hero-featured fade-up" id="heroFeatured">
+        <!-- JS에서 동적 로드 -->
+    </section>
+
+    <!-- Archive Card Grid -->
+    <section class="featured fade-up" id="archive">
+        <h2>Latest Archive</h2>
+        <div class="card-grid" id="cardGrid"></div>
+        <p class="no-results" id="noResults">검색 결과가 없습니다.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-box fade-up" id="contact">
+        <h2>문의 및 제안</h2>
+        <p>문의사항은 아래 버튼을 눌러주세요.</p>
+        <a href="https://forms.gle/여기에구글폼주소" target="_blank" class="button">Google Form</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <strong>@west150official</strong>
+        <div>west150official@gmail.com</div>
+        <div class="social">
+            <a href="https://x.com/west150official" target="_blank" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://threads.net/@west150official" target="_blank" aria-label="Threads">
+                <!-- Threads SVG Icon -->
+                <svg viewBox="0 0 16 16">
+                    <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161"/>
+                </svg>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 WEST150</p>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" aria-label="맨 위로 이동">↑</button>
+
+    <!-- Card Modal -->
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="닫기">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // 카드 데이터
+        const cardsData = [
+            {
+                "id": 1,
+                "title": "삼위일체",
+                "category": "조직신학",
+                "date": "2026.07.23",
+                "tags": ["삼위일체", "조직신학"],
+                "description": "삼위일체 교리에 대한 핵심 개념과 성경적 근거를 카드뉴스로 쉽게 정리했습니다.",
+                "image": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&auto=format&fit=crop"
+            },
+            {
+                "id": 2,
+                "title": "창세기 개요",
+                "category": "성경",
+                "date": "2026.07.24",
+                "tags": ["창세기", "구약"],
+                "description": "창조부터 요셉의 이야기까지, 창세기의 전체적인 구조와 흐름을 한눈에 파악할 수 있습니다.",
+                "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop"
+            }
+        ];
+
+        // 다크모드 토글
+        const themeToggle = document.getElementById("themeToggle");
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            themeToggle.textContent = "☀️";
+        }
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            const isDark = document.body.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            themeToggle.textContent = isDark ? "☀️" : "🌙";
+        });
+
+        // 내부 앵커 링크 처리 및 검색 메뉴 클릭 시 자동 포커스 기능 추가
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener("click", (e) => {
+                const targetId = link.getAttribute("href").slice(1);
+                const target = document.getElementById(targetId);
+                
+                if (target) {
+                    e.preventDefault();
+                    
+                    // 모바일 메뉴가 열려있을 때 닫기 처리
+                    const mobileNav = document.getElementById("mobileNav");
+                    const menuToggle = document.getElementById("menuToggle");
+                    if (mobileNav.classList.contains("open")) {
+                        mobileNav.classList.remove("open");
+                        menuToggle.textContent = "☰";
+                        menuToggle.setAttribute("aria-expanded", "false");
+                    }
+                    
+                    // 고정 헤더 영역을 고려한 부드러운 스크롤
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                    
+                    // 'Search' 버튼 클릭 시 검색 인풋 활성화 (스크롤 완료 후 포커스)
+                    if (targetId === "search") {
+                        setTimeout(() => {
+                            const searchInput = document.getElementById("searchInput");
+                            searchInput.focus();
+                        }, 500); 
+                    }
+                }
+            });
+        });
+
+        // 모바일 햄버거 메뉴 토글
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileNav = document.getElementById("mobileNav");
+
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = mobileNav.classList.toggle("open");
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+            menuToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        document.addEventListener("click", (e) => {
+            if (mobileNav.classList.contains("open") && !mobileNav.contains(e.target) && e.target !== menuToggle) {
+                mobileNav.classList.remove("open");
+                menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        // 검색엔진용 구조화 데이터 (JSON-LD) 삽입
+        function injectStructuredData(sortedCards) {
+            const ld = {
+                "@context": "https://schema.org",
+                "@type": "Blog",
+                "name": "Christian Theology Archive",
+                "blogPost": sortedCards.map(card => ({
+                    "@type": "BlogPosting",
+                    "headline": card.title,
+                    "description": card.description,
+                    "image": card.image,
+                    "datePublished": card.date.replaceAll(".", "-"),
+                    "keywords": card.tags.join(", ")
+                }))
+            };
+            const script = document.createElement("script");
+            script.type = "application/ld+json";
+            script.textContent = JSON.stringify(ld);
+            document.head.appendChild(script);
+        }
+
+        // 렌더링
+        function renderApp() {
+            if (cardsData.length === 0) return;
+
+            // 최신순 정렬 (날짜 기준)
+            const sorted = [...cardsData].sort((a, b) => new Date(b.date.replaceAll(".", "-")) - new Date(a.date.replaceAll(".", "-")));
+
+            // Hero 대형 카드 (가장 최신 글)
+            const heroData = sorted[0];
+            const heroFeatured = document.getElementById("heroFeatured");
+            heroFeatured.innerHTML = `
+                <div class="hero-card" onclick="openModal(${heroData.id})">
+                    <img src="${heroData.image}" alt="${heroData.title}" loading="lazy" decoding="async">
+                    <div class="hero-card-content">
+                        <span class="hero-badge">Featured Archive</span>
+                        <span class="category">${heroData.category}</span>
+                        <h2>${heroData.title}</h2>
+                        <p>${heroData.description}</p>
+                        <span class="date">${heroData.date}</span>
+                    </div>
+                </div>
+            `;
+
+            // 그리드 카드 (hero에 쓰인 글은 제외해 중복 노출 방지)
+            const grid = document.getElementById("cardGrid");
+            grid.innerHTML = "";
+            sorted.slice(1).forEach(card => {
+                const tagsStr = card.tags.map(t => `#${t}`).join(" ");
+                grid.innerHTML += `
+                    <div class="card" onclick="openModal(${card.id})">
+                        <img src="${card.image}" alt="${card.title}" loading="lazy" decoding="async">
+                        <div class="card-content">
+                            <span class="category">${card.category}</span>
+                            <h3>${card.title}</h3>
+                            <p>${card.description}</p>
+                            <small>${card.date} · ${tagsStr}</small>
+                        </div>
+                    </div>
+                `;
+            });
+
+            injectStructuredData(sorted);
+        }
+
+        // 모달 팝업
+        const modal = document.getElementById("cardModal");
+        const modalBody = document.getElementById("modalBody");
+        const modalClose = document.getElementById("modalClose");
+
+        function openModal(id) {
+            const card = cardsData.find(item => item.id === id);
+            if (!card) return;
+
+            const tagsStr = card.tags.map(t => `#${t}`).join(" ");
+            modalBody.innerHTML = `
+                <img src="${card.image}" alt="${card.title}">
+                <div class="modal-text">
+                    <span class="category">${card.category}</span>
+                    <h2>${card.title}</h2>
+                    <p>${card.description}</p>
+                    <small style="color:var(--sub);">${card.date} | ${tagsStr}</small>
+                </div>
+            `;
+            modal.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
+
+        modalClose.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeModal();
+        });
+
+        function closeModal() {
+            modal.classList.remove("show");
+            document.body.style.overflow = "auto";
+        }
+
+        // 검색
+        const searchInput = document.getElementById("searchInput");
+        const noResults = document.getElementById("noResults");
+
+        searchInput.addEventListener("input", function() {
+            filterCards(this.value.trim().toLowerCase());
+        });
+
+        function filterCards(keyword) {
+            const cards = document.querySelectorAll(".card-grid .card");
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const isVisible = text.includes(keyword);
+                card.style.display = isVisible ? "block" : "none";
+                if (isVisible) visibleCount++;
+            });
+            noResults.style.display = (cards.length > 0 && visibleCount === 0) ? "block" : "none";
+        }
+
+        // Back to Top 버튼
+        const backToTop = document.getElementById("backToTop");
+        function toggleBackToTop() {
+            if (window.scrollY > 150) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        }
+        window.addEventListener("scroll", toggleBackToTop, { passive: true });
+        toggleBackToTop();
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // 스크롤 애니메이션
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+        renderApp();
+    </script>
+</body>
+</html>
