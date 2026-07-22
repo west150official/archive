@@ -1,1 +1,20 @@
-
+[
+  {
+    "id": 1,
+    "title": "삼위일체",
+    "category": "조직신학",
+    "date": "2026.07.23",
+    "tags": ["삼위일체", "조직신학"],
+    "description": "삼위일체 교리에 대한 핵심 내용을 카드뉴스로 정리했습니다.",
+    "image": "images/trinity.jpg"
+  },
+  {
+    "id": 2,
+    "title": "창세기 개요",
+    "category": "성경",
+    "date": "2026.07.24",
+    "tags": ["창세기", "구약"],
+    "description": "창세기의 전체 흐름을 이해하기 쉽게 정리했습니다.",
+    "image": "images/genesis.jpg"
+  }
+]
