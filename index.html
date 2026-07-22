@@ -11,7 +11,6 @@
 <meta name="description" content="신학 카드뉴스 아카이브">
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +29,7 @@ WEST150
 
 <nav>
 
-<a href="#">Home</a>
+<a href="index.html">Home</a>
 
 <a href="archive.html">Archive</a>
 
@@ -43,9 +42,7 @@ WEST150
 <div class="right-menu">
 
 <button id="themeToggle">
-
 🌙
-
 </button>
 
 </div>
@@ -68,7 +65,7 @@ Think Biblically.
 
 </p>
 
-<a href="archive.html" class="button">
+<a href="#archive" class="button">
 
 Explore Archive
 
@@ -87,18 +84,15 @@ Search
 </h2>
 
 <input
-
 type="text"
-
-placeholder="검색어 또는 #태그 입력"
-
 id="searchInput"
-
->
+placeholder="제목 또는 태그 검색">
 
 </section>
 
 <section class="tags">
+
+<button id="showAll">전체</button>
 
 <button>#창세기</button>
 
@@ -118,7 +112,7 @@ id="searchInput"
 
 </section>
 
-<section class="featured">
+<section class="featured" id="archive">
 
 <h2>
 
@@ -126,37 +120,9 @@ Latest Archive
 
 </h2>
 
-<div class="card-grid" id="cardGrid">
-
-</div>
-
-<img src="images/sample.jpg">
-
-<div class="card-content">
-
-<span class="category">
-
-조직신학
-
-</span>
-
-<h3>
-
-삼위일체
-
-</h3>
-
-<p>
-
-#삼위일체
-
-#조직신학
-
-</p>
-
-</div>
-
-</div>
+<div
+class="card-grid"
+id="cardGrid">
 
 </div>
 
@@ -172,19 +138,14 @@ Latest Archive
 
 <p>
 
-사이트 개선 의견이나 콘텐츠 제안을 보내주세요.
+사이트 개선이나 콘텐츠 제안을 보내주세요.
 
 </p>
 
 <a
-
-href="https://forms.gle/여기에폼주소"
-
+href="https://forms.gle/여기에구글폼주소"
 target="_blank"
-
-class="button"
-
->
+class="button">
 
 Google Form
 
@@ -194,15 +155,11 @@ Google Form
 
 <footer>
 
-<div>
-
 <strong>
 
 @west150official
 
 </strong>
-
-</div>
 
 <div>
 
@@ -212,9 +169,17 @@ west150official@gmail.com
 
 <div class="social">
 
-<a href="#">𝕏</a>
+<a href="https://x.com/west150official">
 
-<a href="#">Threads</a>
+𝕏
+
+</a>
+
+<a href="https://threads.net/@west150official">
+
+Threads
+
+</a>
 
 </div>
 
