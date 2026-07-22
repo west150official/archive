@@ -90,3 +90,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
     });
 
 });
+
+/* ==========================================
+   카드 자동 생성
+========================================== */
+
+fetch("data/cards.json")
+  .then(response => response.json())
+  .then(cards => {
+
+    const grid = document.getElementById("cardGrid");
+
+    if (!grid) return;
+
+    cards.forEach(card => {
+
+      const tags = card.tags.map(tag => `#${tag}`).join(" ");
+
+      grid.innerHTML += `
+        <div class="card">
+
+          <img src="${card.image}" alt="${card.title}">
+
+          <div class="card-content">
+
+            <span class="category">${card.category}</span>
+
+            <h3>${card.title}</h3>
+
+            <p>${tags}</p>
+
+            <small>${card.date}</small>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+  })
+  .catch(error => {
+
+    console.error("cards.json 불러오기 실패", error);
+
+  });
