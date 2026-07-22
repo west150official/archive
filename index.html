@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEST150 | Theological Archive</title>
+    <title>Christian Theology | Theological Archive</title>
     <meta name="description" content="신학 카드뉴스 아카이브">
 
+    <!-- 폰트 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
-           WEST150 Archive Total CSS (Apple Style)
+           Christian Theology Archive Total CSS (Apple Style)
         ========================================== */
         :root {
             --bg: #f5f5f7;
@@ -77,20 +78,22 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            letter-spacing: .8px;
+            letter-spacing: .5px;
+            cursor: pointer;
         }
 
         nav {
             display: flex;
-            gap: 45px;
+            gap: 40px;
         }
 
         nav a {
             color: var(--text);
             text-decoration: none;
             font-size: 15px;
+            font-weight: 500;
             transition: var(--transition);
         }
 
@@ -115,15 +118,76 @@
             transform: rotate(15deg) scale(1.05);
         }
 
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #menuToggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--card);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            font-size: 18px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 64px;
+            right: 20px;
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 12px;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 180px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity .25s ease, transform .25s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 14px;
+            border-radius: 10px;
+            transition: background .2s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(0, 113, 227, .08);
+            color: var(--blue);
+        }
+
         /* Hero Header */
         .hero {
-            padding-top: 140px;
-            padding-bottom: 40px;
+            padding-top: 130px;
+            padding-bottom: 30px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: clamp(48px, 7vw, 90px);
+            font-size: clamp(44px, 6.5vw, 84px);
             font-weight: 700;
             line-height: 1.05;
             margin-bottom: 15px;
@@ -136,7 +200,72 @@
             margin-bottom: 30px;
         }
 
-        /* Hero Card (최신 대표 카드 대형 디스플레이) */
+        /* Search Section (Hero 바로 아래 중앙 배치) */
+        .search-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px 20px;
+            text-align: center;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 650px;
+            height: 56px;
+            border: none;
+            outline: none;
+            border-radius: 999px;
+            background: var(--card);
+            color: var(--text);
+            padding: 0 28px;
+            font-size: 17px;
+            box-shadow: var(--shadow);
+            transition: .3s;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, .2);
+        }
+
+        /* Tags */
+        .tags {
+            max-width: 1200px;
+            margin: 20px auto 60px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        .tags button {
+            border: none;
+            background: var(--card);
+            color: var(--text);
+            padding: 10px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: var(--shadow);
+            transition: .25s;
+        }
+
+        .tags button:hover, .tags button.active {
+            background: var(--blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--sub);
+            font-size: 17px;
+            display: none;
+        }
+
+        /* Hero Featured Card */
         .hero-featured {
             max-width: 1100px;
             margin: 0 auto 80px;
@@ -163,13 +292,13 @@
         .hero-card img {
             width: 100%;
             height: 100%;
-            min-height: 400px;
+            min-height: 380px;
             object-fit: cover;
             display: block;
         }
 
         .hero-card-content {
-            padding: 50px;
+            padding: 45px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -189,84 +318,23 @@
         }
 
         .hero-card-content h2 {
-            font-size: 38px;
+            font-size: 36px;
             line-height: 1.2;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             font-weight: 700;
         }
 
         .hero-card-content p {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--sub);
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .hero-card-content .date {
             font-size: 14px;
             color: var(--sub);
             opacity: 0.8;
-        }
-
-        /* Search Section */
-        .search-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px 20px;
-            text-align: center;
-        }
-
-        .search-section h2 {
-            font-size: 36px;
-            margin-bottom: 25px;
-        }
-
-        #searchInput {
-            width: 100%;
-            max-width: 600px;
-            height: 56px;
-            border: none;
-            outline: none;
-            border-radius: 999px;
-            background: var(--card);
-            color: var(--text);
-            padding: 0 28px;
-            font-size: 17px;
-            box-shadow: var(--shadow);
-            transition: .3s;
-        }
-
-        #searchInput:focus {
-            box-shadow: 0 0 0 4px rgba(0, 113, 227, .2);
-        }
-
-        /* Tags */
-        .tags {
-            max-width: 1200px;
-            margin: 25px auto 60px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 0 20px;
-        }
-
-        .tags button {
-            border: none;
-            background: var(--card);
-            color: var(--text);
-            padding: 10px 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-size: 14px;
-            box-shadow: var(--shadow);
-            transition: .25s;
-        }
-
-        .tags button:hover, .tags button.active {
-            background: var(--blue);
-            color: white;
-            transform: translateY(-2px);
         }
 
         /* Grid Cards Section */
@@ -349,7 +417,7 @@
         /* Contact Box */
         .contact-box {
             max-width: 1000px;
-            margin: 60px auto 100px;
+            margin: 40px auto 0;
             padding: 70px 40px;
             background: var(--card);
             border-radius: 32px;
@@ -369,6 +437,7 @@
             margin-bottom: 30px;
         }
 
+        /* Button & Hover Fix */
         .button {
             display: inline-flex;
             align-items: center;
@@ -390,33 +459,61 @@
 
         /* Footer */
         footer {
-            padding: 60px 20px;
-            border-top: 1px solid var(--border);
+            padding: 100px 20px 50px;
             text-align: center;
             background: var(--bg);
         }
 
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-bottom: 36px;
+        }
+
+        .footer-links a {
+            color: var(--sub);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--blue);
+        }
+
+        .footer-divider {
+            max-width: 1000px;
+            margin: 0 auto 36px;
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
         footer strong {
             display: block;
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         footer div {
-            margin: 8px 0;
+            margin: 4px 0;
             color: var(--sub);
+            font-size: 14px;
         }
 
         .social {
             display: flex;
             justify-content: center;
-            gap: 16px;
-            margin-top: 20px;
+            gap: 14px;
+            margin: 24px 0 20px;
         }
 
         .social a {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -424,7 +521,7 @@
             text-decoration: none;
             background: var(--card);
             color: var(--text);
-            font-size: 18px;
+            font-size: 16px;
             transition: .3s;
             box-shadow: var(--shadow);
         }
@@ -435,7 +532,20 @@
             transform: translateY(-4px);
         }
 
-        /* Modal Popup (카드 상세 보기) */
+        .social svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: var(--sub);
+            opacity: .7;
+            margin-top: 20px !important;
+        }
+
+        /* Modal Popup */
         .modal {
             display: none;
             position: fixed;
@@ -539,77 +649,115 @@
             nav {
                 display: none;
             }
+            #menuToggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- 헤더 (Christian Theology 로고 & 네비게이션) -->
     <header class="header">
-        <div class="logo">WEST150</div>
+        <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">Christian Theology</div>
         <nav>
-            <a href="#">Home</a>
+            <a href="#home">Home</a>
             <a href="#archive">Archive</a>
+            <a href="#home">About</a>
             <a href="#contact">Contact</a>
         </nav>
         <div class="right-menu">
-            <button id="themeToggle">🌙</button>
+            <button id="themeToggle" aria-label="다크모드 전환">🌙</button>
+            <button id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
         </div>
     </header>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#archive">Archive</a>
+        <a href="#home">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-    <section class="hero fade-up">
+    <!-- Hero Title -->
+    <section class="hero fade-up" id="home">
         <h1>Think Biblically.</h1>
         <p>말씀을 더 깊이 이해하다.</p>
     </section>
 
-    <section class="hero-featured fade-up" id="heroFeatured">
-        </section>
-
+    <!-- Search Section (상단 중앙 배치) -->
     <section class="search-section fade-up">
-        <h2>Search</h2>
-        <input type="text" id="searchInput" placeholder="제목 또는 태그 검색">
+        <input type="text" id="searchInput" placeholder="제목 또는 태그 검색 (예: 창세기, 삼위일체)">
     </section>
 
+    <!-- Tags Filter -->
     <section class="tags fade-up">
         <button class="active" id="showAll">전체</button>
-        <button>#삼위일체</button>
         <button>#창세기</button>
-        <button>#조직신학</button>
-        <button>#구약</button>
-        <button>#종교개혁</button>
+        <button>#출애굽기</button>
+        <button>#예수님</button>
+        <button>#삼위일체</button>
+        <button>#교회사</button>
         <button>#칼빈</button>
+        <button>#종교개혁</button>
+        <button>#구원론</button>
     </section>
 
+    <!-- Hero Featured Card (최신 카드 대형 노출) -->
+    <section class="hero-featured fade-up" id="heroFeatured">
+        <!-- JS에서 동적 로드 -->
+    </section>
+
+    <!-- Archive Card Grid -->
     <section class="featured fade-up" id="archive">
         <h2>Latest Archive</h2>
         <div class="card-grid" id="cardGrid"></div>
+        <p class="no-results" id="noResults">검색 결과가 없습니다.</p>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact-box fade-up" id="contact">
         <h2>문의 및 제안</h2>
         <p>사이트 개선이나 신학 콘텐츠 제안을 보내주세요.</p>
         <a href="https://forms.gle/여기에구글폼주소" target="_blank" class="button">Google Form</a>
     </section>
 
+    <!-- Footer -->
     <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#archive">Archive</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <hr class="footer-divider">
         <strong>@west150official</strong>
         <div>west150official@gmail.com</div>
         <div class="social">
-            <a href="https://x.com/west150official" target="_blank">𝕏</a>
-            <a href="https://threads.net/@west150official" target="_blank">Threads</a>
+            <a href="https://x.com/west150official" target="_blank" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://threads.net/@west150official" target="_blank" aria-label="Threads">
+                <!-- Threads SVG Icon -->
+                <svg viewBox="0 0 192 192">
+                    <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.005 97.5801 44.005C72.228 44.005 52.882 63.8562 52.882 96.2393C52.882 128.819 72.5188 148 97.5801 148C116.522 148 130.584 137.982 136.216 120.354C136.804 118.514 135.808 116.516 133.987 115.931C132.181 115.352 130.222 116.326 129.616 118.151C124.896 132.885 112.83 140.852 97.5801 140.852C77.4116 140.852 60.0302 124.636 60.0302 96.2393C60.0302 68.04 77.1066 51.1531 97.5801 51.1531C117.802 51.1531 129.988 64.218 131.782 85.0886C122.825 81.3323 111.968 79.5242 99.8827 80.1265C79.7432 81.129 65.6548 93.3075 66.6573 113.447C67.1472 123.31 73.1979 131.229 83.2798 133.805C93.4152 136.395 103.882 132.868 110.122 124.717C115.228 118.048 118.006 108.825 118.397 97.3591C124.524 99.9673 130.016 103.541 134.422 108.064C140.81 114.618 144.005 123.385 143.292 132.404C142.131 147.098 130.404 158.452 115.58 159.888C95.2711 161.855 75.312 153.275 63.666 137.525C51.6812 121.331 46.2238 100.122 48.3371 77.9407C51.1396 48.5132 73.8056 24.3292 103.111 20.089C134.809 15.5036 163.626 36.636 168.083 67.892C168.343 69.7153 169.987 70.9859 171.803 70.7259C173.619 70.4659 174.889 68.822 174.629 67.006C169.613 31.8488 137.199 8.08051 101.536 13.238C68.5833 17.999 43.081 45.1849 39.9298 78.2831C37.5528 103.226 43.708 127.1 57.2119 145.347C70.3204 163.063 92.7936 172.713 115.892 170.479C134.819 168.647 149.778 154.148 151.261 135.385C152.179 123.774 148.067 112.512 139.814 104.053C134.428 98.5298 127.818 94.2882 120.475 91.3912C120.279 80.6433 117.616 71.3926 112.502 64.7088C104.282 53.963 89.8407 48.5583 72.882 51.1531" fill-rule="evenodd"/>
+                </svg>
+            </a>
         </div>
-        <p>© 2026 WEST150</p>
+        <p class="footer-copyright">© 2026 WEST150</p>
     </footer>
 
+    <!-- Card Modal -->
     <div class="modal" id="cardModal">
         <div class="modal-content">
-            <button class="modal-close" id="modalClose">&times;</button>
-            <div class="modal-body" id="modalBody">
-                </div>
+            <button class="modal-close" id="modalClose" aria-label="닫기">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
+    <!-- Script -->
     <script>
-        // 1. 내장 데이터 (JSON 파일 대신 직접 내장하여 에러 차단)
+        // 카드 데이터
         const cardsData = [
             {
                 "id": 1,
@@ -631,7 +779,7 @@
             }
         ];
 
-        // 2. 다크모드 토글
+        // 다크모드 토글
         const themeToggle = document.getElementById("themeToggle");
         const savedTheme = localStorage.getItem("theme");
 
@@ -647,18 +795,48 @@
             themeToggle.textContent = isDark ? "☀️" : "🌙";
         });
 
-        // 3. 렌더링 함수
+        // 모바일 햄버거 메뉴 토글
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileNav = document.getElementById("mobileNav");
+
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = mobileNav.classList.toggle("open");
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+            menuToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        mobileNav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileNav.classList.remove("open");
+                menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (mobileNav.classList.contains("open") && !mobileNav.contains(e.target) && e.target !== menuToggle) {
+                mobileNav.classList.remove("open");
+                menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        // 렌더링
         function renderApp() {
             if (cardsData.length === 0) return;
 
-            // (1) Hero 대형 카드 표시 (데이터의 첫 번째 항목)
-            const heroData = cardsData[0];
+            // 최신순 정렬 (날짜 기준)
+            const sorted = [...cardsData].sort((a, b) => new Date(b.date.replaceAll(".", "-")) - new Date(a.date.replaceAll(".", "-")));
+
+            // Hero 대형 카드 (가장 최신 글)
+            const heroData = sorted[0];
             const heroFeatured = document.getElementById("heroFeatured");
             heroFeatured.innerHTML = `
                 <div class="hero-card" onclick="openModal(${heroData.id})">
-                    <img src="${heroData.image}" alt="${heroData.title}">
+                    <img src="${heroData.image}" alt="${heroData.title}" loading="lazy">
                     <div class="hero-card-content">
-                        <span class="hero-badge">Featured Story</span>
+                        <span class="hero-badge">Featured Archive</span>
                         <span class="category">${heroData.category}</span>
                         <h2>${heroData.title}</h2>
                         <p>${heroData.description}</p>
@@ -667,14 +845,14 @@
                 </div>
             `;
 
-            // (2) 일반 카드 그리드 표시
+            // 그리드 카드 (hero에 쓰인 글은 제외해 중복 노출 방지)
             const grid = document.getElementById("cardGrid");
             grid.innerHTML = "";
-            cardsData.forEach(card => {
+            sorted.slice(1).forEach(card => {
                 const tagsStr = card.tags.map(t => `#${t}`).join(" ");
                 grid.innerHTML += `
                     <div class="card" onclick="openModal(${card.id})">
-                        <img src="${card.image}" alt="${card.title}">
+                        <img src="${card.image}" alt="${card.title}" loading="lazy">
                         <div class="card-content">
                             <span class="category">${card.category}</span>
                             <h3>${card.title}</h3>
@@ -686,7 +864,7 @@
             });
         }
 
-        // 4. 모달 상세 창
+        // 모달 팝업
         const modal = document.getElementById("cardModal");
         const modalBody = document.getElementById("modalBody");
         const modalClose = document.getElementById("modalClose");
@@ -713,23 +891,32 @@
         modal.addEventListener("click", (e) => {
             if (e.target === modal) closeModal();
         });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeModal();
+        });
 
         function closeModal() {
             modal.classList.remove("show");
             document.body.style.overflow = "auto";
         }
 
-        // 5. 검색 및 태그 필터링
+        // 검색 및 태그 필터
         const searchInput = document.getElementById("searchInput");
+        const noResults = document.getElementById("noResults");
+
         searchInput.addEventListener("input", function() {
-            filterCards(this.value.toLowerCase());
+            tagButtons.forEach(b => b.classList.remove("active"));
+            showAllBtn.classList.add("active");
+            filterCards(this.value.trim().toLowerCase());
         });
 
+        const showAllBtn = document.getElementById("showAll");
         const tagButtons = document.querySelectorAll(".tags button");
         tagButtons.forEach(btn => {
             btn.addEventListener("click", () => {
                 tagButtons.forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
+                searchInput.value = "";
                 const keyword = btn.innerText === "전체" ? "" : btn.innerText.replace("#", "").toLowerCase();
                 filterCards(keyword);
             });
@@ -737,13 +924,17 @@
 
         function filterCards(keyword) {
             const cards = document.querySelectorAll(".card-grid .card");
+            let visibleCount = 0;
             cards.forEach(card => {
                 const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(keyword) ? "block" : "none";
+                const isVisible = text.includes(keyword);
+                card.style.display = isVisible ? "block" : "none";
+                if (isVisible) visibleCount++;
             });
+            noResults.style.display = (cards.length > 0 && visibleCount === 0) ? "block" : "none";
         }
 
-        // 6. 스크롤 fade-up 애니메이션
+        // 스크롤 애니메이션
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -754,9 +945,7 @@
 
         document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 
-        // 앱 실행
         renderApp();
     </script>
 </body>
 </html>
-
